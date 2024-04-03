@@ -5,6 +5,6 @@ class person:
         self.father_name = father_name
         self.roll_number = roll_number
 
-user = person("zeeshan", "31102", "yasin", "2004")
+user = person("hamza", "31102", "kashif", "2051")
 
 print(user.name, user.CNIC)
