@@ -1,0 +1,30 @@
+class ACL:
+    def __init__(self):
+        self.permissions = {}
+    
+    def grant_permission(self, role, resource, permission):
+        if role not in self.permissions:
+            self.permissions[role] = {}
+        if resource not in self.permissions[role]:
+            self.permissions[role][resource] = set()
+        self.permissions[role][resource].add(permission)
+    
+    def check_permission(self, role, resource, permission):
+        if role in self.permissions and \
+           resource in self.permissions[role] and \
+           permission in self.permissions[role][resource]:
+            return True
+        return False
+
+# Example usage:
+acl = ACL()
+
+# Define roles
+acl.grant_permission("admin", "dashboard", "view")
+acl.grant_permission("admin", "dashboard", "edit")
+acl.grant_permission("user", "profile", "view")
+
+# Check permissions
+print(acl.check_permission("admin", "dashboard", "view"))  # Output: True
+print(acl.check_permission("user", "dashboard", "view"))   # Output: False
+print(acl.check_permission("user", "profile", "view"))     # Output: True
